@@ -34,7 +34,7 @@ public class FamilyTree
             // Add childNode to this node's children list. Also
             // set childNode's parent to this node.
         	addChild(childNode);
-        	childNode = parent;
+        	parent = childNode;
         }
         
         
@@ -51,8 +51,9 @@ public class FamilyTree
             {
                 // If child.getNodeWithName(targetName) returns a non-null node,
                 // then that's the node we're looking for. Return it.
-            	if(child.getNodeWithName(targetName) != null) {
-            		return this;
+            	TreeNode childs = child.getNodeWithName(targetName);
+            	if(childs != null) {
+            		return childs;
             	}
             }
             
@@ -66,8 +67,10 @@ public class FamilyTree
         ArrayList<TreeNode> collectAncestorsToList()
         {
             ArrayList<TreeNode> ancestors = new ArrayList<>();
-            for(TreeNode child: parent.children) {
-            	
+            TreeNode root = parent;
+            while(root != null) {
+            	ancestors.add(root);
+            	root = root.parent;
             }
             // ?????  Collect ancestors of this TreeNode into the array list. HINT: going up
             // the nodes of a tree is like traversing a linked list. If that isn’t clear,
@@ -116,8 +119,8 @@ public class FamilyTree
 
 		// Parse the input file. Create a FileReader that reads treeFile. Create a BufferedReader
 		// that reads from the FileReader.
-		FileReader fr = null;
-		BufferedReader br = fr.;
+		FileReader fr = new File("");
+		BufferedReader br = fr.();
 		String line = br.readLine();
 		while ((line = br.readLine()) != null)
 			addLine(line);
@@ -170,7 +173,7 @@ public class FamilyTree
 	TreeNode getMostRecentCommonAncestor(String name1, String name2) throws TreeException
 	{
 		// Get nodes for input names.
-		TreeNode node1 = root.???		// node whose name is name1
+		TreeNode node1 = root.getName()		// node whose name is name1
 		if (node1 == null)
 			??? Throw a TreeException with a useful message
 		TreeNode node2 = root.???		// node whose name is name2
